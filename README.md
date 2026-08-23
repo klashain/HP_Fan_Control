@@ -21,7 +21,7 @@ Open-source fan control utility for **HP OMEN laptops** on Windows. Take full co
 | Requirement | Notes |
 |---|---|
 | Windows 10 / 11 (64-bit) | |
-| HP OMEN laptop | Uses HP's `hpqBIntM` WMI interface exposed by the firmware. Other machines will run the app but cannot control/read fans. |
+| HP OMEN laptop | Uses HP's `hpqBIntM` WMI interface exposed by the firmware. **HP Victus** and Pavilion Gaming models share this interface and *may* work partially or fully — untested, command IDs can differ between generations. Other machines run the app but cannot control/read fans. Test yours: `Get-CimInstance -Namespace root\wmi -ClassName hpqBIntM` in an elevated PowerShell. |
 | Administrator rights | Required on every launch (Windows UAC prompt) — fan/EC access is privileged. |
 | NVIDIA driver | Optional — only needed for GPU temperature. |
 

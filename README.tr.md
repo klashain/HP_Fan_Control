@@ -21,7 +21,7 @@
 | Gereksinim | Notlar |
 |---|---|
 | Windows 10 / 11 (64-bit) | |
-| HP OMEN dizüstü | BIOS tarafından sunulan HP `hpqBIntM` WMI arayüzünü kullanır. Diğer cihazlarda uygulama açılır ama fanlar okunamaz/yönetilemez. |
+| HP OMEN dizüstü | BIOS tarafından sunulan HP `hpqBIntM` WMI arayüzünü kullanır. **HP Victus** ve Pavilion Gaming modelleri aynı arayüzü paylaşır ve *kısmen veya tamamen* çalışabilir — test edilmedi, komut ID'leri nesillere göre farklılık gösterebilir. Diğer cihazlarda uygulama açılır ama fanlar okunamaz/yönetilemez. Cihazınızı test edin: yükseltilmiş PowerShell'de `Get-CimInstance -Namespace root\wmi -ClassName hpqBIntM`. |
 | Yönetici hakları | Her açılışta gerekli (Windows UAC onayı) — fan/EC erişimi ayrıcalıklıdır. |
 | NVIDIA sürücüsü | İsteğe bağlı — yalnızca GPU sıcaklığı için. |
 
