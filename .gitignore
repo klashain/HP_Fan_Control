@@ -1,0 +1,20 @@
+# Dependencies
+node_modules/
+
+# Python build artifacts
+backend/__pycache__/
+backend/build/
+backend/dist/
+*.pyc
+
+# Local build outputs (keep backend/tcp_server.exe out too — built artifact)
+backend/tcp_server.exe
+
+# electron-builder output
+release/
+dist/
+
+# Prebuilt installer staged for manual GitHub Release upload
+_release-upload/
+
+not.txt

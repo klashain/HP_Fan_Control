@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OMEN Fan Control</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="drag-region">
+    <span>OMEN FAN CONTROL <span id="appVersion"></span></span>
+    <div class="window-controls">
+      <button class="win-btn" id="settingsBtn" data-i18n-title="settings" title="Ayarlar">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+      </button>
+      <button class="win-btn" id="minBtn">_</button>
+      <button class="win-btn" id="closeBtn">X</button>
+    </div>
+  </div>
+
+  <!-- Settings Modal -->
+  <div class="modal-overlay" id="settingsModal">
+    <div class="modal-content">
+      <h2 data-i18n="settings_title">Ayarlar</h2>
+
+      <div class="setting-item">
+        <label for="langSelect" data-i18n="language">Dil / Language</label>
+        <select id="langSelect" style="background: var(--card-bg); color: #fff; border: 1px solid rgba(255,255,255,0.2); border-radius: 4px; padding: 3px 6px;">
+          <option value="tr">Türkçe</option>
+          <option value="en">English</option>
+        </select>
+      </div>
+
+      <div class="setting-item">
+        <label for="autostartCheck" data-i18n="autostart">Windows Başlatıldığında Çalıştır</label>
+        <input type="checkbox" id="autostartCheck">
+      </div>
+
+      <div class="setting-item">
+        <label for="startMinCheck" data-i18n="start_minimized">Başlangıçta Görev Çubuğuna Gizle</label>
+        <input type="checkbox" id="startMinCheck">
+      </div>
+
+      <div class="setting-item" style="flex-direction: column; align-items: flex-start; gap: 10px; padding-top: 10px; border-top: 1px solid rgba(255,255,255,0.1);">
+        <label style="font-weight: bold; color: var(--text);" data-i18n="fan_limit_title">Fan Devir Sınırı</label>
+
+        <div style="width: 100%; display: flex; justify-content: space-between; align-items: center;">
+          <span style="font-size: 13px;"><span data-i18n="max_fan_rpm">En Yüksek Fan Devri:</span> <span class="info-icon" id="rpmInfoIcon" title="Bilgi">&#9432;</span></span>
+          <input type="number" id="safeMaxRpmInput" step="100" style="width: 70px; background: var(--card-bg); color: #fff; border: 1px solid var(--primary); border-radius: 4px; padding: 4px; text-align: center;" value="4000">
+        </div>
+        <p style="font-size: 11px; color: var(--text-muted); margin-top: -5px;" data-i18n="max_fan_rpm_desc">
+          Fanlar hiçbir modda, hiçbir koşulda bu değerin üzerinde dönmez. Uygulama ölçümlere göre sınırı kendisi hassas şekilde ayarlar.
+        </p>
+
+        <div style="width: 100%; display: flex; justify-content: space-between; align-items: center; margin-top: 5px;">
+          <span style="font-size: 13px;"><span data-i18n="eco_cpu_limit">Tasarruf Modu İşlemci Limiti:</span> <span id="ecoCpuLimitVal">%99</span></span>
+          <input type="range" id="ecoCpuLimitSlider" min="50" max="100" value="99" style="width: 100px;">
+        </div>
+        <p style="font-size: 11px; color: var(--text-muted); margin-top: -5px;" data-i18n="eco_cpu_limit_desc">
+          Tasarruf modundayken işlemcinin maksimum gücünü kısar. (%99 Turbo Boost'u kapatıp sıcaklıkları harika düşürür).
+        </p>
+
+        <button id="saveRpmSettingsBtn" style="width: 100%; background: var(--primary); color: #fff; border: none; padding: 8px; border-radius: 6px; cursor: pointer; font-weight: bold;" data-i18n="save_limits">Sınırları Kaydet ve Uygula</button>
+      </div>
+
+      <div class="about-section">
+        <h3 data-i18n="about">Hakkında</h3>
+        <p><strong>OMEN FAN CONTROL</strong></p>
+        <p>Developed by <span class="developer-name">klashain</span></p>
+      </div>
+      <div id="infoModal" class="info-modal">
+        <div class="info-modal-header">
+          <span class="info-modal-title" data-i18n="info">Bilgi</span>
+          <button class="info-modal-close" aria-label="Kapat">×</button>
+        </div>
+        <div class="info-modal-body">
+          <p><strong data-i18n="warning">Uyarı:</strong> <span data-i18n="rpm_warning_text">Fan devri, ayarladığınız sınırın ±100 RPM civarında değişiklik gösterebilir. EC (gömülü denetleyici) değerleri 100 RPM'lik adımlarla çalıştığı için küçük sapmalar normaldir.</span></p>
+          <p data-i18n="hw_limit_text">Maksimum donanım sınırı cihazdan cihaza değişiklik gösterebilir. Uygulama, bu sınırın aşılmasını önlemek için sürekli ölçüm yapar ve gerekirse ayarınızı kendisi günceller.</p>
+        </div>
+      </div>
+
+      <button class="close-modal-btn" id="closeSettingsBtn" data-i18n="close">Kapat</button>
+    </div>
+  </div>
+
+  <!-- First Run Modal -->
+  <div class="modal-overlay" id="firstRunModal">
+    <div class="modal-content" style="text-align: center;">
+      <h2 data-i18n="setup_done_title">Kurulum Tamamlandı!</h2>
+      <p style="color: var(--text-muted); font-size: 14px; margin-bottom: 10px;" data-i18n="setup_done_desc">
+        OMEN Fan Control'ü bilgisayarınız her açıldığında otomatik olarak arka planda başlatmak ister misiniz?
+      </p>
+      <div style="display: flex; gap: 10px; justify-content: center; margin-top: 10px;">
+        <button class="close-modal-btn" id="firstRunYesBtn" style="flex: 1; background: var(--primary);" data-i18n="yes_autostart">Evet, Otomatik Başlat</button>
+        <button class="close-modal-btn" id="firstRunNoBtn" style="flex: 1;" data-i18n="no">Hayır</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="app-container">
+    <div class="header">
+      <div class="status-indicator">
+        <div class="dot red"></div>
+        <div class="status-text" id="connStatus"><span data-i18n="connecting">Bağlanıyor...</span></div>
+      </div>
+
+      <div class="mode-selector-container" style="display: flex; gap: 20px; align-items: center; background: rgba(0,0,0,0.2); padding: 5px 15px; border-radius: 8px;">
+
+        <div class="mode-group" style="display: flex; gap: 5px; align-items: center;">
+          <span style="font-size: 11px; color: var(--text-muted); text-transform: uppercase; margin-right: 5px;" data-i18n="power_plan">Güç Planı:</span>
+          <button class="power-btn active" data-mode="default" data-i18n="power_default">DENGELİ</button>
+          <button class="power-btn" data-mode="performance" data-i18n="power_performance">TAM GÜÇ</button>
+          <button class="power-btn" data-mode="quiet" data-i18n="power_quiet">TASARRUF</button>
+        </div>
+
+        <div style="width: 1px; height: 20px; background: rgba(255,255,255,0.2);"></div>
+
+        <div class="mode-group" style="display: flex; gap: 5px; align-items: center;">
+          <span style="font-size: 11px; color: var(--text-muted); text-transform: uppercase; margin-right: 5px;" data-i18n="fan">Fan:</span>
+          <button class="fan-btn active" data-mode="manual">MANUAL</button>
+          <button class="fan-btn" data-mode="max">MAX</button>
+          <button class="fan-btn" data-mode="curve">CURVE</button>
+        </div>
+
+        <div style="width: 1px; height: 20px; background: rgba(255,255,255,0.2);"></div>
+
+        <button class="fan-btn active" id="masterToggle" data-i18n-title="toggle_control" title="Uygulama kontrolünü aç/kapat">AKTİF</button>
+
+      </div>
+    </div>
+
+    <!-- Master Control Panel -->
+    <div class="master-control-panel" id="masterSliderContainer" style="display: none;">
+      <h3 data-i18n="master_slider">Sistem Soğutma Gücü (Master Slider)</h3>
+      <div class="slider-wrapper">
+        <span style="font-weight: bold; width: 40px" id="masterSliderVal">50%</span>
+        <input type="range" id="masterSlider" min="0" max="100" value="50" style="flex:1">
+      </div>
+    </div>
+
+    <div class="main-content">
+      <!-- CPU Card -->
+      <div class="card">
+        <h2>CPU</h2>
+        <div class="dial-container">
+          <svg class="dial" viewBox="0 0 100 100">
+            <circle class="bg" cx="50" cy="50" r="40"></circle>
+            <circle class="progress cpu-progress" cx="50" cy="50" r="40" stroke-dasharray="251.2" stroke-dashoffset="251.2"></circle>
+          </svg>
+          <div class="dial-content">
+            <span class="value" id="cpuRpm">--</span>
+            <span class="label">RPM</span>
+          </div>
+        </div>
+        <div class="temp-display">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z"></path>
+          </svg>
+          <span id="cpuTemp">--</span> °C
+        </div>
+      </div>
+
+      <!-- GPU Card -->
+      <div class="card">
+        <h2>GPU</h2>
+        <div class="dial-container">
+          <svg class="dial" viewBox="0 0 100 100">
+            <circle class="bg" cx="50" cy="50" r="40"></circle>
+            <circle class="progress gpu-progress" cx="50" cy="50" r="40" stroke-dasharray="251.2" stroke-dashoffset="251.2"></circle>
+          </svg>
+          <div class="dial-content">
+            <span class="value" id="gpuRpm">--</span>
+            <span class="label">RPM</span>
+          </div>
+        </div>
+        <div class="temp-display">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--danger)" stroke-width="2">
+            <path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z"></path>
+          </svg>
+          <span id="gpuTemp">--</span> °C
+        </div>
+      </div>
+    </div>
+
+    <!-- Curve Editor Modal -->
+    <div class="curve-editor" id="curveEditor" style="display: none;">
+      <div class="curve-header">
+        <h3 data-i18n="curve_editor">Özel Fan Eğrisi (Fan Curve)</h3>
+        <div class="profile-selector">
+          <button class="profile-btn active" data-profile="1">1</button>
+          <button class="profile-btn" data-profile="2">2</button>
+          <button class="profile-btn" data-profile="3">3</button>
+        </div>
+      </div>
+      <div class="graph-wrapper">
+        <div class="y-axis">
+          <span>100%</span>
+          <span>75%</span>
+          <span>50%</span>
+          <span>25%</span>
+          <span>0%</span>
+        </div>
+        <div class="graph-main">
+          <div class="graph-container">
+            <svg id="curveSvg" width="100%" height="100%">
+              <path id="curvePath" class="curve-path"></path>
+            </svg>
+            <div id="curveTooltip" class="curve-tooltip" style="display: none;">--</div>
+          </div>
+          <div class="x-axis">
+            <span>0°C</span>
+            <span>25°C</span>
+            <span>50°C</span>
+            <span>75°C</span>
+            <span>100°C</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Log Console -->
+  <button id="logOpenBtn" data-i18n-title="log_console" title="Log Konsolu">LOG</button>
+  <div id="logPanel">
+    <div id="logHeader">
+      <span data-i18n="logs">KAYIT</span>
+      <div>
+        <button id="logClearBtn" data-i18n="clear">Temizle</button>
+        <button id="logCloseBtn">&#10005;</button>
+      </div>
+    </div>
+    <div id="logBody"></div>
+  </div>
+
+  <script src="renderer.js"></script>
+</body>
+</html>

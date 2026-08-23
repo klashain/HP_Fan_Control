@@ -1,0 +1,64 @@
+{
+  "name": "omen-fan-control",
+  "productName": "OMEN Fan Control",
+  "version": "2.1.2",
+  "description": "HP Omen Fan Control",
+  "main": "main.js",
+  "author": "klashain",
+  "scripts": {
+    "start": "electron .",
+    "dist": "electron-builder --win"
+  },
+  "devDependencies": {
+    "electron": "^31.7.7",
+    "electron-builder": "^24.13.3"
+  },
+  "build": {
+    "appId": "com.klashain.omenfancontrol",
+    "productName": "OMEN Fan Control",
+    "directories": {
+      "output": "../release/installer"
+    },
+    "files": [
+      "main.js",
+      "index.html",
+      "renderer.js",
+      "styles.css",
+      "package.json"
+    ],
+    "extraResources": [
+      {
+        "from": "backend/tcp_server.exe",
+        "to": "backend/tcp_server.exe"
+      },
+      {
+        "from": "build/icon.png",
+        "to": "icons/icon.png"
+      },
+      {
+        "from": "build/icon_32.png",
+        "to": "icons/icon_32.png"
+      }
+    ],
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": ["x64"]
+        }
+      ],
+      "icon": "build/icon.ico",
+      "requestedExecutionLevel": "requireAdministrator"
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": true,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "OMEN Fan Control",
+      "installerLanguages": ["en_US", "tr_TR"],
+      "language": "1033"
+    }
+  }
+}
