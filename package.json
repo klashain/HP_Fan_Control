@@ -2,7 +2,26 @@
   "name": "omen-fan-control",
   "productName": "OMEN Fan Control",
   "version": "2.1.2",
-  "description": "HP Omen Fan Control",
+  "description": "Open-source fan control for HP OMEN laptops on Windows: custom fan curves, manual speed, power modes, live temps & RPM.",
+  "keywords": [
+    "hp-omen",
+    "omen",
+    "fan-control",
+    "fan-curve",
+    "hp-victus",
+    "laptop",
+    "windows",
+    "electron"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/klashain/HP_Fan_Control#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/klashain/HP_Fan_Control.git"
+  },
+  "bugs": {
+    "url": "https://github.com/klashain/HP_Fan_Control/issues"
+  },
   "main": "main.js",
   "author": "klashain",
   "scripts": {
