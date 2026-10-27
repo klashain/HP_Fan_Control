@@ -14,7 +14,6 @@
   <img src="https://img.shields.io/badge/platform-Windows%2010%20%7C%2011-0078D6?logo=windows&logoColor=white" alt="Windows 10 | 11">
   <img src="https://img.shields.io/badge/Electron-%2B%20Python-47848F?logo=electron&logoColor=white" alt="Electron + Python">
   <a href="LICENSE"><img src="https://img.shields.io/github/license/klashain/HP_Fan_Control" alt="MIT lisansı"></a>
-  <a href="https://claude.ai"><img src="https://img.shields.io/badge/Built%20with-Claude-D97757?logo=claude&logoColor=white" alt="Claude ile geliştirildi"></a>
 </p>
 
 <p align="center">
@@ -124,10 +123,6 @@ Hata bildirimleri, model uyumluluk raporları ve pull request'ler memnuniyetle k
 **HP Victus / Pavilion Gaming** ya da listede olmayan bir OMEN modeliniz varsa, model adınız ve yukarıdaki `hpqBIntM` test komutunun çıktısıyla bir issue açın — cihaz desteğini büyütmenin en hızlı yolu bu.
 
 Araç işinize yaradıysa repoya bir ⭐ bırakmanız, diğer OMEN kullanıcılarının onu bulmasına yardım eder.
-
-## Teşekkürler
-
-Bu proje [Claude](https://claude.ai) (Anthropic) yardımıyla geliştirildi.
 
 ## Lisans
 

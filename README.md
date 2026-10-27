@@ -14,7 +14,6 @@
   <img src="https://img.shields.io/badge/platform-Windows%2010%20%7C%2011-0078D6?logo=windows&logoColor=white" alt="Windows 10 | 11">
   <img src="https://img.shields.io/badge/Electron-%2B%20Python-47848F?logo=electron&logoColor=white" alt="Electron + Python">
   <a href="LICENSE"><img src="https://img.shields.io/github/license/klashain/HP_Fan_Control" alt="MIT license"></a>
-  <a href="https://claude.ai"><img src="https://img.shields.io/badge/Built%20with-Claude-D97757?logo=claude&logoColor=white" alt="Built with Claude"></a>
 </p>
 
 <p align="center">
@@ -124,10 +123,6 @@ Bug reports, model compatibility reports and pull requests are welcome.
 If you own an **HP Victus / Pavilion Gaming** or an OMEN model that isn't listed, please open an issue with your model name and the output of the `hpqBIntM` test command above — that is the fastest way to grow device support.
 
 If this tool helped you, a ⭐ on the repo helps other OMEN owners find it.
-
-## Acknowledgements
-
-Developed with the help of [Claude](https://claude.ai) by Anthropic.
 
 ## License
 
