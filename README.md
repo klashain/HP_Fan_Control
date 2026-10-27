@@ -5,6 +5,12 @@ Open-source fan control utility for **HP OMEN laptops** on Windows. Take full co
 > Not affiliated with HP. Use at your own risk.
 > Open-source fan control for HP OMEN laptops on Windows - custom fan curves, manual speed, power modes, live temps & RPM. Electron + Python.
 
+## Screenshots
+
+| Curve mode | Manual mode |
+|---|---|
+| ![Curve mode](docs/screenshots/curve-mode.png) | ![Manual mode](docs/screenshots/manual-mode.png) |
+
 ## Features
 
 - Real-time CPU / GPU temperature monitoring

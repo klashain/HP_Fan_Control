@@ -4,6 +4,12 @@
 
 > HP ile bağlantılı değildir. Kullanım riski size aittir.
 
+## Ekran görüntüleri
+
+| Eğri modu | Manuel mod |
+|---|---|
+| ![Eğri modu](docs/screenshots/curve-mode.png) | ![Manuel mod](docs/screenshots/manual-mode.png) |
+
 ## Özellikler
 
 - Gerçek zamanlı CPU / GPU sıcaklık takibi
