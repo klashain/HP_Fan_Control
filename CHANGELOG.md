@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.1.3
+
+- Fixed: GPU temperature not shown with newer NVIDIA drivers (decimal values like `49.59` were rejected)
+- `nvidia-smi.exe` is now also located outside PATH (System32, NVSMI, DriverStore)
+- Temperatures show `--` instead of `0.0` when no reading is available
+
 ## 2.1.2
 
 - Fixed: LOG console button not opening (duplicate click handler)

@@ -307,8 +307,8 @@ function updateUI(data) {
     applyEnabledState(fan.enabled);
   }
 
-  els.cpuTemp.innerText = temperatures.cpu.toFixed(1) || '--';
-  els.gpuTemp.innerText = temperatures.gpu.toFixed(1) || '--';
+  els.cpuTemp.innerText = temperatures.cpu > 0 ? temperatures.cpu.toFixed(1) : '--';
+  els.gpuTemp.innerText = temperatures.gpu > 0 ? temperatures.gpu.toFixed(1) : '--';
 
   const cpuRpm = fmtRpm(fan.fanSpeeds.cpu);
   const gpuRpm = fmtRpm(fan.fanSpeeds.gpu);

@@ -1,7 +1,7 @@
 {
   "name": "omen-fan-control",
   "productName": "OMEN Fan Control",
-  "version": "2.1.2",
+  "version": "2.1.3",
   "description": "HP Omen Fan Control",
   "main": "main.js",
   "author": "klashain",
