@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.1.3
+
+- Fixed: GPU temperature always showing 0 on newer NVIDIA drivers (e.g. RTX 50 series), which report decimal values like `46.28`
+- nvidia-smi is now located in System32, NVSMI and the driver store, not only via PATH
+- Temperatures that can't be read now show `--` instead of `0.0`
+
 ## 2.1.2
 
 - Fixed: LOG console button not opening (duplicate click handler)
