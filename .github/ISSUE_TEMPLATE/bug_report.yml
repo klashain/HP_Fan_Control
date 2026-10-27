@@ -1,0 +1,44 @@
+name: Bug report / Hata bildirimi
+description: Something doesn't work as expected / Bir şey beklendiği gibi çalışmıyor
+labels: [bug]
+body:
+  - type: input
+    id: model
+    attributes:
+      label: Laptop model / Dizüstü modeli
+      placeholder: "HP OMEN 16-xd0xxx"
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: App version / Uygulama sürümü
+      placeholder: "2.1.2"
+    validations:
+      required: true
+  - type: dropdown
+    id: os
+    attributes:
+      label: Windows
+      options: ["Windows 11", "Windows 10"]
+    validations:
+      required: true
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened? / Ne oldu?
+      description: Steps to reproduce and what you expected / Nasıl tekrar edilir ve ne bekliyordunuz
+    validations:
+      required: true
+  - type: textarea
+    id: wmi
+    attributes:
+      label: hpqBIntM test output / hpqBIntM test çıktısı
+      description: "Elevated PowerShell: Get-CimInstance -Namespace root\\wmi -ClassName hpqBIntM"
+      render: shell
+  - type: textarea
+    id: log
+    attributes:
+      label: Activity log / İşlem günlüğü
+      description: Copy from the app's built-in log console / Uygulamanın günlük konsolundan kopyalayın
+      render: shell
